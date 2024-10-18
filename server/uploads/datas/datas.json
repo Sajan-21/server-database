@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "mark",
+    "email": "mark@gmail.com",
+    "password": "$2a$10$Itvi7vEp7JxEQkNgASey9.joH9iVhdKfE71tsgUDOYbTgyx4/3H1a",
+    "user_type": "671264852152af16cb20acc0",
+    "age": "20"
+  },
+  {
+    "name": "shanks",
+    "email": "shanks@gmail.com",
+    "password": "$2a$10$J2VxvG5WYTBFFtOf2NDnk.NQWzdOpvkU1CEkHPsT5DCMdrJ6/oady",
+    "user_type": "671264852152af16cb20acc0",
+    "age": "20",
+    "id": 2
+  },
+  {
+    "name": "john",
+    "email": "john@gmail.com",
+    "password": "$2a$10$GpYEYd8yAerAHrrzaTCZD.GEnMocma/py8wjzxudu4DCPcc5Cqnm6",
+    "user_type": "671264852152af16cb20acc0",
+    "age": "20",
+    "id": 3
+  },
+  {
+    "name": "jane",
+    "email": "jane@gmail.com",
+    "password": "$2a$10$X5aBxU5YAK2z.L4a4aRSpeA/m/EeQ4M3EOJ247ANVypNc9ruDx/Au",
+    "user_type": "671264852152af16cb20acc0",
+    "age": "20",
+    "id": 4
+  }
+]

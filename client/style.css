@@ -1,0 +1,7 @@
+body{
+    background-image: linear-gradient(darkblue, lightblue);
+}
+.Login-Form-div{
+    width: 100vw;
+    height: 100vh;
+}
