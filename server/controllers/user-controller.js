@@ -91,21 +91,24 @@ exports.createUser = async function(req, res) {
         let datas = await getServerDatabase();
         console.log("data : ",datas);
 
-        let parsed_datas = JSON.parse(datas);
-        console.log("parsed_datas : ",parsed_datas);
+        let newId;
 
-        let new_id = parsed_datas.length+1;
-        console.log("new_id : ",new_id,typeof(new_id));
-
-        body.id = new_id;
-        console.log("body : ",body);
-
-        parsed_datas.push(body);
-        console.log("parsed_datas : ",parsed_datas);
-
-        // let stringified_datas = JSON.stringify(parsed_datas);
-
-        await dataUpload(parsed_datas, "datas");
+        if(datas === null) {
+            newId = 1;
+            body.id = newId;
+            let dataArr = [];
+            dataArr.push(body);
+            console.log("dataArr : ",dataArr);
+            await dataUpload(dataArr, "datas");
+        }else{
+            let parsed_data = JSON.parse(datas);
+            console.log("parsed_datas : ",parsed_data);
+            newId = parsed_data.length+1;
+            body.id = newId;
+            parsed_data.push(body);
+            console.log("parsed_data after push : ",parsed_data);
+            await dataUpload(parsed_data, "datas");
+        }
 
         // await users.create(body);
         

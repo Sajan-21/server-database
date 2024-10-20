@@ -66,15 +66,23 @@ exports.fileUpload = async function (file, directory) {
 
 exports.getServerDatabase = async function() {
     return new Promise((resolve, reject) => {
-        const file_path = path.join(__dirname, '../uploads/datas/datas.json');
+        let directoryFile = '../uploads/datas/datas.json'
+        const file_path = path.join(__dirname, directoryFile);
         fs.readFile(file_path, 'utf-8', (err, data) => {
             if(err) {
-                reject(err);
-            }else{
+                console.log("error : ",err);
+                if(err.errno === -4058) {
+                    resolve(null);
+                }else {
+                    reject(err);
+                }
+            }
+            else{
+                console.log("data : ",data);
                 resolve(data);
             }
-        })
-    })
+        });
+    });
 }
 
 exports.dataUpload = async function(body, directory) {
@@ -86,29 +94,28 @@ exports.dataUpload = async function(body, directory) {
             let file_path = `uploads/${directory}`;
             console.log("file_path : ",file_path);
 
-            let file_name = "datas.json";
+            let file_name = 'datas.json';
 
-            fs.mkdir(file_path, {recursive : true}, (err) => {
-                if(err) {
-                    console.log("err : ",err);
+            fs.mkdir(file_path, { recursive: true }, (err) => {
+                if (err) {
+                    console.log("Error creating directory:", err);
                     reject(err.message ? err.message : err);
-                }else {
-                    let upload_path = `uploads/${directory}/${file_name}`;
-                    console.log("upload_path : ",upload_path);
+                } else {
+                    let upload_path = path.join(file_path, file_name);
+                    console.log("File path:", upload_path);
 
                     let dataToWrite = JSON.stringify(body, null, 2); 
 
-                    fs.writeFile(upload_path, dataToWrite, 'utf8', (err) => {
+                    fs.writeFile(upload_path, dataToWrite, (err) => {
                         if (err) {
-                            console.log("Error writing file:", err);
-                            reject(err);
+                            console.error('Error writing JSON file:', err);
                         } else {
-                            console.log("File successfully written!");
-                            resolve({ success: true, message: "File successfully written!" });
+                            console.log(`JSON file successfully created: ${upload_path}`);
                         }
                     });
                 }
-            })
+            });
+            
         } catch (error) {
             console.log("error : ",error);
             reject(error.message ? error.message : error);
